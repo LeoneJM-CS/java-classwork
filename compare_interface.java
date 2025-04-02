@@ -1,28 +1,35 @@
 package ClassWork;
 import java.util.*;
 
-class Employee {
-	String name;
-	int age;
-	int id;
-	int salary;
-	public void AddEmployee(String name, int age, int id, int salary){
-		
-		Scanner scnr = new Scanner(System.in);
-		this.name = scnr.nextLine();
-		this.age = scnr.nextInt();
-		this.id = scnr.nextInt();
-		this.salary = scnr.nextInt();
+class Author implements Comparable<Author>{
+	String firstName;
+	String lastName;
+	String bookName;
+	Author(String first, String last, String book){
+		this.firstName = first;
+		this.lastName = last;
+		this.bookName = book;
+	}
+	@Override
+	public int compareTo(Author au) {
+		int last = this.lastName.compareTo(au.lastName);
+		return last == 0? this.firstName.compareTo(au.firstName) : last;
 	}
 }
-
 public class compare_interface {
 	public static void main(String [] args) {
-		ArrayList<Employee> al = new ArrayList<>();
-		Scanner scnr = new Scanner(System.in);
-		Employee em = new Employee();
+		ArrayList<Author> al=new ArrayList<Author>();
 		
-		al.add(em.AddEmployee(null, 0, 0, 0));
-		scnr.close();
+		al.add(new Author("Henry","Miller", "Tropic of Cancer"));
+		al.add(new Author("Nalo","Hopkinson", "Brown Girl in the Ring"));
+		al.add(new Author("Frank","Miller", "300"));
+		al.add(new Author("Deborah","Hopkinson", "Sky Boys"));
+		al.add(new Author("George R. R.","Martin", "Song of Ice and Fire"));
+		
+		Collections.sort(al);
+		
+		for(Author str:al){
+		System.out.println(str.lastName+", "+str.firstName +" Book: "+str.bookName);
+		}
 	}
 }
